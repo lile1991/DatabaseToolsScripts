@@ -23,5 +23,10 @@ IDEA Database Tools 生成代码脚本
 ![Image text](images/3.png)
   
   
+  
+#### 生成结果示例：
+![Image text](images/DTO.png)
+![Image text](images/VO.png)
+
 ###如果以上操作后，代码或者脚本没在Project视图中显示， 请刷新一下
 ![Image text](images/10.png)
