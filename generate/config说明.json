@@ -1,0 +1,20 @@
+{
+  "runtimeLog": "D:/generate.logs",
+  "modules": [
+    {
+      "name": "模块名",
+      "entityPackageName": "自定义参数， 可在模板中通过${module.xxx}引种到",
+
+      "templates": [
+        {
+          "templateFile": "模板文件路径， 放在工程同目录",
+          "targetPath": "代码生成路径",
+          "packageName": "包名",
+          "classPrefix": "类/文件前缀",
+          "classSuffix": "类/文件后缀",
+          "fileExt": "文件后缀名， 默认是java"
+        }
+      ]
+    }
+  ]
+}

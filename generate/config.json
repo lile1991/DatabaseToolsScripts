@@ -1,0 +1,43 @@
+{
+  "runtimeLog": "D:/generate.logs",
+  "modules": [
+    {
+      "name": "trade",
+      
+      "entityPackageName": "com.hotel.dao.entity",
+
+      "templates": [
+        {
+          "templateFile": "templates/DTO.vm",
+          "targetPath": "hotel/src/main/java/com/hotel/service/dto",
+          "packageName": "com.hotel.dto",
+          "classPrefix": "",
+          "classSuffix": "DTO"
+        },
+        {
+          "templateFile": "templates/VO.vm",
+          "targetPath": "hotel/src/main/java/com/hotel/web/vo",
+          "packageName": "com.hotel.web.vo",
+          "classPrefix": "",
+          "classSuffix": "VO"
+        },
+        {
+          "templateFile": "templates/mapperExt.vm",
+          "targetPath": "hotel/src/main/java/com/hotel/dao/mapper",
+          "packageName": "com.hotel.dao.mapper",
+          "classPrefix": "",
+          "classSuffix": "MapperExt"
+        },
+
+        {
+          "templateFile": "templates/mapperExtXml.vm",
+          "targetPath": "hotel/src/main/java/com/hotel/dao/mapping",
+          "classPrefix": "",
+          "packageName": "com.hotel.dao.mapper",
+          "classSuffix": "MapperExt",
+          "fileExt": "xml"
+        }
+      ]
+    }
+  ]
+}

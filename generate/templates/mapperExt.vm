@@ -1,0 +1,11 @@
+package $packageName;
+
+import $module.entityPackageName.$class.oriName;
+
+#set($tempSuperClassNameLength = $class.name.length() - 3)
+#set($tempSuperClassName = $class.name.substring(0, $tempSuperClassNameLength))
+/**
+* $class.comment
+*/
+public interface $class.name extends $tempSuperClassName, Mapper<$class.oriName> {
+}
