@@ -38,13 +38,12 @@ FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generate
   SELECTION.filter { it instanceof DasTable && it.getKind() == ObjectKind.TABLE }.each { generate(it, dir) }
 }
 
+FILE_RESOURCE_LOADER_PATH = PROJECT.getBaseDir().path
+POJO_TEMPLATE = "POJOTemplate.vm" // 模板文件位置， 可以改为自己的， 放到工程根路径下即可
+RUNTIME_LOG = "D:/dbTools.log"
 Template template
 
 def initTemplate() {
-  FILE_RESOURCE_LOADER_PATH = PROJECT.getBaseDir().path
-  POJO_TEMPLATE = "POJOTemplate.vm"
-  RUNTIME_LOG = "D:/dbTools.log"
-
   // 初始化模版引擎
   VelocityEngine ve = new VelocityEngine()
   ve.setProperty(RuntimeConstants.RUNTIME_LOG, RUNTIME_LOG)
