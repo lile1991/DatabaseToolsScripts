@@ -8,14 +8,9 @@ import java.io.StringWriter
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.Template
 import org.apache.velocity.app.VelocityEngine
-import org.apache.velocity.app.Velocity
-import org.apache.velocity.exception.ResourceNotFoundException
-import org.apache.velocity.exception.ParseErrorException
-import org.apache.velocity.exception.MethodInvocationException
 import org.apache.velocity.runtime.RuntimeConstants
 import groovy.json.JsonSlurper
 
-packageName = "com.generate;"
 typeMapping = [
         (~/(?i)bigint/)                      : "Long",
         (~/(?i)tinyint/)                     : "Byte",

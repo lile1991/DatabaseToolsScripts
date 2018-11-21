@@ -1,0 +1,22 @@
+package com.sample;
+
+import lombok.Data;
+
+#foreach($imp in $imports)
+import $imp;
+#end
+
+/**
+* $class.comment
+*/
+@Data
+public class $class.name implements Serializable {
+    #foreach($field in $fields)
+
+    /**
+    * $field.comment
+    */
+    private $field.type $field.name;
+    #end
+
+}

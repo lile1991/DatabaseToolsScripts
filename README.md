@@ -5,25 +5,20 @@ IDEA Database Tools 生成代码脚本
 IntelliJ IDEA的Database Tools脚本， 可根据表信息自动生成代码， 基于自带的Generate POJOs.groovy脚本进行了修改， 支持自定义Velocity模板， 无需额外引入jar包。
 
 #### 目录说明
-generate: 配置文件路径  
-hotel: 示例项目
+simple-script: 简化版，无需配置文件，定义模版POJOTemplate.vm即可  
+config-script: 配置版本，需要配置模版参数config.json
 
-## 使用方法：
-#### 1、放置脚本
+#### 放置脚本方法
 展开右侧DatabaseTools， 任意表上右键 -> **Scripted Extensions -> Go to Scripts Directory**.  
 ![Image text](images/1.png)  
 左侧Project视图会自动展开Database Tools and SQL， 右键Show Explorer, 将Generate Templates.groovy放到和Generate POJOs.groovy同一目录  
 ![Image text](images/2.png)
 
-#### 2、编写配置文件
-工程根目录下创建目录generate, 创建**config.json**到改目录下，配置项可参考示例**generate/config说明.json**
-
-#### 3、执行脚本
-展开右侧DatabaseTools， 任意表上右键 -> **Scripted Extensions -> Generate Templates**, 即可执行脚本， 将根据选中表生成对应DTO、VO等自定义代码。
+#### 执行脚本方法
+展开右侧DatabaseTools， 任意表上右键 -> **Scripted Extensions -> 点击对应groovy脚本**, 即可执行。
 ![Image text](images/3.png)
-  
-  
-  
+
+
 #### 生成结果示例：
 ![Image text](images/DTO.png)
 ![Image text](images/VO.png)
