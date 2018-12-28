@@ -40,7 +40,7 @@ FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generate
 
 FILE_RESOURCE_LOADER_PATH = PROJECT.getBaseDir().path
 POJO_TEMPLATE = "POJOTemplate.vm" // 模板文件位置， 可以改为自己的， 放到工程根路径下即可
-RUNTIME_LOG = "D:/dbTools.log"
+RUNTIME_LOG = FILE_RESOURCE_LOADER_PATH + "/dbTools.log"
 Template template
 
 def initTemplate() {
