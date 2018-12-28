@@ -38,20 +38,20 @@ FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generate
   SELECTION.filter { it instanceof DasTable && it.getKind() == ObjectKind.TABLE }.each { generate(it, dir) }
 }
 
-FILE_RESOURCE_LOADER_PATH = PROJECT.getBaseDir().path
-POJO_TEMPLATE = "POJOTemplate.vm" // 模板文件位置， 可以改为自己的， 放到工程根路径下即可
-RUNTIME_LOG = FILE_RESOURCE_LOADER_PATH + "/dbTools.log"
 Template template
 
 def initTemplate() {
   // 初始化模版引擎
   VelocityEngine ve = new VelocityEngine()
-  ve.setProperty(RuntimeConstants.RUNTIME_LOG, RUNTIME_LOG)
-  ve.setProperty( RuntimeConstants.FILE_RESOURCE_LOADER_PATH, FILE_RESOURCE_LOADER_PATH)
+  // 这两个属性可以从RuntimeConstants常量中找到， 引用常量有些版本报错， 就直接写死了
+  // 日志路径      
+  ve.setProperty("runtime.log", PROJECT.getBaseDir().path + "/dbTools.log")
+  // 模板文件路径
+  ve.setProperty("file.resource.loader.path", PROJECT.getBaseDir().path)
   ve.init()
 
-  // 获取模版文件
-  template = ve.getTemplate(POJO_TEMPLATE)
+  // 获取Velocity模版文件, 模板文件可以自己定义
+  template = ve.getTemplate("POJOTemplate.vm")
 }
 
 def generate(table, dir) {
