@@ -44,15 +44,17 @@ def initTemplate() {
   // 初始化模版引擎
   VelocityEngine ve = new VelocityEngine()
   // 这两个属性可以从RuntimeConstants常量中找到， 引用常量有些版本报错， 就直接写死了
-  ve.setProperty("runtime.log", PROJECT.getBaseDir().path + "/dbTools.log")
-  ve.setProperty("file.resource.loader.path", PROJECT.getBaseDir().path)
+  ve.setProperty("runtime.log", PROJECT.getBaseDir().path + "/dbTools.log") // 对应RuntimeConstants.RUNTIME_LOG
+  ve.setProperty("file.resource.loader.path", PROJECT.getBaseDir().path) // 对应RuntimeConstants.FILE_RESOURCE_LOADER_PATH
   ve.init()
 
+  String templateEncoding = "UTF-8"
   // 指定模版文件
-  template = ve.getTemplate("POJOTemplate.vm")
-//  template = ve.getTemplate("POJOTemplate.vm")
-//  template = ve.getTemplate("RespVOTemplate.vm")
-//  template = ve.getTemplate("ServiceTemplate.vm")
+  template = ve.getTemplate("POJOTemplate.vm", templateEncoding)
+//  template = ve.getTemplate("ReqVOTemplate.vm", templateEncoding)
+//  template = ve.getTemplate("RespVOTemplate.vm", templateEncoding)
+//  template = ve.getTemplate("ServiceTemplate.vm", templateEncoding)
+//  template = ve.getTemplate("ControllerTemplate.vm", templateEncoding)
 }
 
 def generate(table, dir) {
@@ -60,8 +62,9 @@ def generate(table, dir) {
   def className = javaName(table.getName(), true)
   // 去掉表明前缀T
   className = className.substring(1)
+
   // 生成的文件名
-  def fileName = className + ".java"
+  def fileName = className + "Controller.java"
 
   VelocityContext ctx = new VelocityContext()
   // 设置变量
@@ -75,11 +78,16 @@ def generate(table, dir) {
 }
 
 def setContextProperty(ctx, table, className, dir) {
+  // 首字母小写
+  def memberName = String.valueOf(Character.toLowerCase(className.charAt(0))) + className.substring(1)
+
   // 将类信息放入模板变量
   ctx.put("class", [
           "name"   : className,   // 类名
           "comment": table.comment    // 表注释
   ])
+
+  ctx.put("memberName", memberName)
 
   def cmbFields = calcFields(table)
   // 将字段信息放入模板变量

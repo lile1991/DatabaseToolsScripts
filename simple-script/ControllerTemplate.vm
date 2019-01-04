@@ -1,0 +1,74 @@
+package com.sample;
+
+import com.sample.dao.entity.${class.name};
+import com.sample.service.BaseService;
+import com.sample.service.${class.name}Service;
+import com.sample.utils.ConvertUtils;
+import com.sample.vo.request.${class.name}ReqVO;
+import com.sample.vo.response.${class.name}RespVO;
+import com.sample.vo.response.PageResponseVO;
+import com.sample.vo.response.ResultVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+
+@RestController
+public class ${class.name}Controller {
+
+    @Autowired
+    private ${class.name}Service ${memberName}Service;
+
+    /**
+     * 分页查询
+     * @param reqVO
+     * @return
+     */
+    @PostMapping("queryPage")
+    public ResultVO<PageResponseVO<${class.name}RespVO>> queryList(@RequestBody ${class.name}ReqVO reqVO) {
+        PageResponseVO<${class.name}> pageResponseVO = ${memberName}Service.selectPage(reqVO);
+        return ResultVO.success(ConvertUtils.convertPage(pageResponseVO, ${class.name}RespVO.class));
+    }
+
+    /**
+     * 单个查询
+     * @param reqVO
+     * @return
+     */
+    @PostMapping("queryOne")
+    public ResultVO<${class.name}RespVO> queryOne(@RequestBody ${class.name}ReqVO reqVO) {
+        return ResultVO.success(ConvertUtils.convert(${memberName}Service.selectFirst(reqVO), ${class.name}RespVO.class));
+    }
+
+    /**
+     * 保存或更新
+     * @param reqVO
+     * @return
+     */
+    @PostMapping("saveOrUpdate")
+    public ResultVO<Integer> saveOrUpdate(@RequestBody ${class.name}ReqVO reqVO) {
+        boolean isCreate = reqVO.getId() == null;
+
+        ${class.name} ${memberName} = ConvertUtils.convert(reqVO, ${class.name}.class);
+        if(isCreate) {
+            reqVO.setCreateTime(new Date());
+            reqVO.setCreateUser(BaseService.SYSTEM_MANAGER_ID);
+        }
+
+        reqVO.setUpdateTime(new Date());
+        reqVO.setUpdateUser(BaseService.SYSTEM_MANAGER_ID);
+        return ResultVO.success(isCreate ? ${memberName}Service.insertSelective(${memberName}) : ${memberName}Service.updateByPrimaryKeySelective(${memberName}));
+    }
+
+    /**
+     * 删除
+     * @param reqVO
+     * @return
+     */
+    @PostMapping("deleteById")
+    public ResultVO<Integer> deleteById(@RequestBody ${class.name}ReqVO reqVO) {
+        return ResultVO.success(${memberName}Service.deleteByPrimaryKey(reqVO.getId()));
+    }
+}
