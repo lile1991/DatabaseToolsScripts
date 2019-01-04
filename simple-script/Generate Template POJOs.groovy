@@ -64,7 +64,7 @@ def generate(table, dir) {
   className = className.substring(1)
 
   // 生成的文件名
-  def fileName = className + "Controller.java"
+  def fileName = className + ".java"
 
   VelocityContext ctx = new VelocityContext()
   // 设置变量
