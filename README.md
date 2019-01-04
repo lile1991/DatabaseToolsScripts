@@ -1,5 +1,5 @@
 # DatabaseToolsScripts
-IDEA Database Tools 生成代码脚本
+IDEA Database Tools 生成代码脚本, 推荐使用**simple-script**， 无需配置文件， 只需定义模板
 
 #### 脚本说明
 IntelliJ IDEA的Database Tools脚本， 可根据表信息自动生成代码， 基于自带的Generate POJOs.groovy脚本进行了修改， 支持自定义Velocity模板， 无需额外引入jar包。
