@@ -55,6 +55,7 @@ def initTemplate() {
 //  template = ve.getTemplate("RespVOTemplate.vm", templateEncoding)
 //  template = ve.getTemplate("ServiceTemplate.vm", templateEncoding)
 //  template = ve.getTemplate("ControllerTemplate.vm", templateEncoding)
+//  template = ve.getTemplate("MapperExtTemplate.vm", templateEncoding)
 }
 
 def generate(table, dir) {
@@ -65,6 +66,9 @@ def generate(table, dir) {
 
   // 生成的文件名
   def fileName = className + ".java"
+//  def fileName = className + "Controller.java"
+//  def fileName = className + "Service.java"
+//  def fileName = className + "MapperExt.xml"
 
   VelocityContext ctx = new VelocityContext()
   // 设置变量
@@ -88,6 +92,9 @@ def setContextProperty(ctx, table, className, dir) {
   ])
 
   ctx.put("memberName", memberName)
+  ctx.put("table", [
+          "name": table.getName()
+  ])
 
   def cmbFields = calcFields(table)
   // 将字段信息放入模板变量
