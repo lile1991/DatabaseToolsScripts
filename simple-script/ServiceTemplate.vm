@@ -1,0 +1,11 @@
+package com.sample;
+
+import org.springframework.stereotype.Service;
+
+import com.contract.housekeeper.dao.entity.$class.name;
+import com.contract.housekeeper.dao.mapper.${class.name}MapperExt;
+
+@Service
+public class ${class.name}Service extends BaseService<Long, $class.name, ${class.name}MapperExt> {
+
+}

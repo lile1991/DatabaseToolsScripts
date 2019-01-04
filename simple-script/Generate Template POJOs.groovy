@@ -44,18 +44,24 @@ def initTemplate() {
   // 初始化模版引擎
   VelocityEngine ve = new VelocityEngine()
   // 这两个属性可以从RuntimeConstants常量中找到， 引用常量有些版本报错， 就直接写死了
-  // 日志路径      
   ve.setProperty("runtime.log", PROJECT.getBaseDir().path + "/dbTools.log")
-  // 模板文件路径
   ve.setProperty("file.resource.loader.path", PROJECT.getBaseDir().path)
   ve.init()
 
-  // 获取Velocity模版文件, 模板文件可以自己定义
+  // 指定模版文件
   template = ve.getTemplate("POJOTemplate.vm")
+//  template = ve.getTemplate("POJOTemplate.vm")
+//  template = ve.getTemplate("RespVOTemplate.vm")
+//  template = ve.getTemplate("ServiceTemplate.vm")
 }
 
 def generate(table, dir) {
+  // 转驼峰， 如t_user转换为TUser
   def className = javaName(table.getName(), true)
+  // 去掉表明前缀T
+  className = className.substring(1)
+  // 生成的文件名
+  def fileName = className + ".java"
 
   VelocityContext ctx = new VelocityContext()
   // 设置变量
@@ -65,7 +71,7 @@ def generate(table, dir) {
   StringWriter sw = new StringWriter()
   template.merge(ctx, sw)
 
-  new File(dir, className + ".java").withPrintWriter("UTF-8") { out -> out.print sw }
+  new File(dir, fileName).withPrintWriter("UTF-8") { out -> out.print sw }
 }
 
 def setContextProperty(ctx, table, className, dir) {
@@ -93,10 +99,10 @@ def calcFields(table) {
     }
 
     fields += [[
-                 name : javaName(col.getName(), false),
-                 type : typeStr,
-                 comment: col.comment,
-                 annos: ""]]
+                       name : javaName(col.getName(), false),
+                       type : typeStr,
+                       comment: col.comment,
+                       annos: ""]]
 
   }
   ["fields": fields, "imports": imports]
@@ -104,8 +110,8 @@ def calcFields(table) {
 
 def javaName(str, capitalize) {
   def s = com.intellij.psi.codeStyle.NameUtil.splitNameIntoWords(str)
-    .collect { Case.LOWER.apply(it).capitalize() }
-    .join("")
-    .replaceAll(/[^\p{javaJavaIdentifierPart}[_]]/, "_")
+          .collect { Case.LOWER.apply(it).capitalize() }
+          .join("")
+          .replaceAll(/[^\p{javaJavaIdentifierPart}[_]]/, "_")
   capitalize || s.length() == 1? s : Case.LOWER.apply(s[0]) + s[1..-1]
 }
